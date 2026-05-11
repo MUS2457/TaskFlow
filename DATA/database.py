@@ -19,3 +19,17 @@ def create_table(conn):
 
     conn.commit()
 
+
+def insert_into_table(conn, tasks):
+    cursor = conn.cursor()
+
+    for task in tasks:
+        cursor.execute("""
+            INSERT INTO Tasks (title, description, priority, deadline, status)
+            VALUES (?, ?, ?, ?, ?)
+        """, (task[0], task[1], task[2], task[4], task[3]))
+
+    conn.commit()
+    conn.close()
+
+
