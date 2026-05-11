@@ -4,11 +4,9 @@ def get_task_title():
     while True:
         title = input("Enter a Task title or 'done' to finish, 'exit' to quit: ").strip()
 
-        # Handle commands
         if title.lower() in ("done", "exit"):
             return title.lower()
 
-        # Validate title
         if not title:
             print("Title cannot be empty.")
             continue
@@ -46,6 +44,19 @@ def get_date(title):
 
         print("Invalid date format. Use YYYY-MM-DD.")
 
+def get_status():
+    while True:
+        print("1. Pending")
+        print("2. In progress")
+        print("3. Completed")
+
+        status = input("Enter a status level (1-3): ").strip()
+
+        if status.isdigit() and int(status) in (1, 2, 3):
+            return int(status)
+
+        print("Invalid status level. Choose 1, 2, or 3.")
+
 
 def get_task():
     collected = []
@@ -62,8 +73,9 @@ def get_task():
 
         description = get_task_description()
         priority = get_priority_level()
+        status = get_status()
         deadline = get_date(title)
 
-        collected.append((title, description, priority, deadline))
+        collected.append((title, description, priority, status, deadline))
 
     return collected
