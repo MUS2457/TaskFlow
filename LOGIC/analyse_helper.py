@@ -11,4 +11,3 @@ def pending_ratio(total, counter_status, x = "Pending"):
 
 def in_progress_ratio(total, counter_status, x = "In progress"):
     return get_ratio(total, counter_status, x)
-

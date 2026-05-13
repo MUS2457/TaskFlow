@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 
 class TaskAnalyser:
     def __init__(self, tasks):
@@ -13,7 +14,7 @@ class TaskAnalyser:
         if not self.tasks:
             return results
 
-        for item in self.tasks:  # i create a helper fc to avoid deplicate logic
+        for item in self.tasks:
             key = getattr(item, parameter)  # get item.status , it's good for obj , the parameter is str
             results[key] = results.get(key, 0) + 1
 
@@ -33,14 +34,95 @@ class TaskAnalyser:
         if not self.tasks:
             return results
 
+        now = datetime.now()
         for item in self.tasks:
-            now = datetime.now()
             if item.deadline < now.date() and item.status != "Completed":
                 results.append(item)
 
         return results
 
+    def due_today(self):
+        results = []
+        if not self.tasks:
+            return results
 
+        now = datetime.now()
+        for item in self.tasks:
+            if item.deadline == now.date() and item.status != "Completed":
+                results.append(item)
+
+        return results
+
+    def future_tasks(self):
+        results = []
+        if not self.tasks:
+            return results
+
+        now = datetime.now()
+        for item in self.tasks:
+            if item.deadline > now.date() and item.status != "Completed":
+                results.append(item)
+
+        return results
+
+    def completed_tasks(self):
+        results = []
+        if not self.tasks:
+            return results
+
+        for item in self.tasks:
+            if item.status == "Completed":
+                results.append(item)
+
+        return results
+
+    def group_by_priority(self):
+        results = {}
+        if not self.tasks:
+            return results
+
+        for item in self.tasks:
+            if item.priority not in results:
+                results[item.priority] = []
+
+            results[item.priority].append(item)
+
+        return results
+
+    def sort_by_priority(self):
+        return sorted(self.tasks, key=lambda item: item.priority, reverse=True) if self.tasks else []
+
+    def search_task(self, keyword):
+        results = []
+        if not self.tasks:
+            return results
+
+        pattern = re.compile(keyword, re.IGNORECASE)
+        for item in self.tasks:
+            if re.search(pattern, item.description):
+                results.append(item)
+
+        return results
+
+    def group_by_status(self):
+        results = {}
+        if not self.tasks:
+            return results
+        for item in self.tasks:
+            if item.status not in results:
+                results[item.status] = []
+            results[item.status].append(item)
+
+        return results
+
+    def sort_by_status(self):
+        status_order = {
+            "Pending": 1,
+            "In Progress": 2,
+            "Completed": 3
+        }
+
+        return sorted(self.tasks, key=lambda item: status_order[item.status]) if self.tasks else []
 
 
 
