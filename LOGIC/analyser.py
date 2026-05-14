@@ -1,5 +1,6 @@
 from datetime import datetime
 import re
+from LOGIC import analyse_helper
 
 class TaskAnalyser:
     def __init__(self, tasks):
@@ -123,6 +124,27 @@ class TaskAnalyser:
         }
 
         return sorted(self.tasks, key=lambda item: status_order[item.status]) if self.tasks else []
+
+    def tasks_summary(self):
+        total = self.total()
+        status_counts = self.count_status()
+        priority_counts = self.count_priority()
+        deadline_counts = self.count_deadline()
+
+        summary = {
+            "total": total,
+            "status_counts": status_counts,
+            "priority_counts": priority_counts,
+            "deadline_counts": deadline_counts,
+            "completed_ratio": analyse_helper.completed_ratio(total, status_counts, "Completed"),
+            "pending_ratio": analyse_helper.pending_ratio(total, status_counts, "Pending"),
+            "in_progress_ratio": analyse_helper.in_progress_ratio(total, status_counts, "In progress"),
+            "overdue": len(self.overdue_tasks()),
+            "due_today": len(self.due_today()),
+            "future": len(self.future_tasks())
+        }
+
+        return summary
 
 
 

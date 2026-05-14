@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e906e230-275a-490e-b6dc-ecdc8b77f06a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/OPERATIONS/update_tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/input.py" beforeDir="false" afterPath="$PROJECT_DIR$/OPERATIONS/add_task.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOGIC/analyse_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/LOGIC/analyse_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LOGIC/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/LOGIC/analyser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,12 +43,14 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;memory.settings&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -79,7 +80,15 @@
       <workItem from="1778405838944" duration="2210000" />
       <workItem from="1778487757374" duration="4531000" />
       <workItem from="1778573540017" duration="4293000" />
-      <workItem from="1778659190797" duration="5218000" />
+      <workItem from="1778659190797" duration="5539000" />
+      <workItem from="1778664879810" duration="303000" />
+      <workItem from="1778665206827" duration="1000" />
+      <workItem from="1778665217700" duration="99000" />
+      <workItem from="1778665336326" duration="41000" />
+      <workItem from="1778665443488" duration="88000" />
+      <workItem from="1778665546760" duration="3000" />
+      <workItem from="1778749854119" duration="22000" />
+      <workItem from="1778749885998" duration="5856000" />
     </task>
     <servers />
   </component>
