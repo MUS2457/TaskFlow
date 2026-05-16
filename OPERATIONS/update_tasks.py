@@ -30,6 +30,7 @@ def update_tasks(conn):
         task = results_map[select]
 
         while True:
+            print(f"Chosen task : {task}")
             print("1. Title")
             print("2. Description")
             print("3. Priority")
