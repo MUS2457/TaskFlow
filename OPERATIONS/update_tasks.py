@@ -18,9 +18,18 @@ def get_results(rows) :
 
     return results
 
+def update_query(conn, colum, new_task, task_id ):  # after writing this query many times , i deside to make a fc to
+    now = datetime.now()                                 # remove duplication
+
+    cursor = conn.cursor()
+    cursor.execute(f"UPDATE Tasks SET {colum} = ?, updated_at = ? WHERE id = ?",
+                   (new_task, now , task_id)
+    )
+    conn.commit()
+
+
 def update_tasks(conn):
     cursor = conn.cursor()
-    now = datetime.now()
 
     while True:
         search = input("Please enter the task title of what you want to update or 'exit' to quit: ").strip()
@@ -29,10 +38,13 @@ def update_tasks(conn):
             print("Returning to main menu")
             break
 
-
-        cursor.execute("SELECT title, description, "
-                            "priority, deadline, status "
-                            "FROM Tasks WHERE title = ?", (search.upper(),))
+        cursor.execute(
+            "SELECT title, description, "
+            "priority, deadline, status, id, "
+            "created_at "
+            "FROM Tasks WHERE title = ?",
+            (search.upper(),)
+        )
 
         rows = cursor.fetchall()
 
@@ -43,6 +55,9 @@ def update_tasks(conn):
         results = get_results(rows)
 
         results_map = {i:f for i,f in enumerate(results, start=1)}
+
+        for i, f in results_map.items() :
+            print(f"{i}. {f}")
 
         while True:
             select = int(input("Which task would you like to update (enter a number): ? "))
@@ -68,60 +83,40 @@ def update_tasks(conn):
                         print("Returning to main menu")
                         return
 
-                    cursor.execute("UPDATE Tasks "
-                                   "SET title = ?, updated_at = ? "
-                                   "WHERE id = ?", (title, now, task[5]))
-                    conn.commit()
+                    column = "title"  # keep database safe by not giving user control over column and table name
+                    update_query(conn, column, title , task[5])
                     print("Title updated")
                     return
 
                 elif choice_2 == 2:
                     description = add_task.get_task_description()
-                    cursor.execute("UPDATE Tasks "
-                                   "SET description = ? , updated_at = ? "
-                                   "WHERE id = ?", (description, now ,task[5]))
-                    conn.commit()
+                    column = "description"
+                    update_query(conn, column, description , task[5])
                     print("Description updated")
                     return
 
                 elif choice_2 == 3:
                     priority = add_task.get_priority_level()
-                    cursor.execute("UPDATE Tasks "
-                                   "SET priority = ? , updated_at = ? "
-                                   "WHERE id = ?", (priority, now, task[5]))
-                    conn.commit()
+                    column = "priority"
+                    update_query(conn, column, priority, task[5])
                     print("Priority level updated")
                     return
 
                 elif choice_2 == 4:
                     status = add_task.get_status()
-                    cursor.execute("UPDATE Tasks "
-                                   "SET status = ? , updated_at = ? "
-                                   "WHERE id = ?", (status, now ,task[5]))
-                    conn.commit()
+                    column = "status"
+                    update_query(conn, column, status, task[5])
                     print("Status updated")
                     return
 
                 elif choice_2 == 5:
                     deadline = add_task.get_date(task[0])
-                    cursor.execute("UPDATE Tasks "
-                                   "SET deadline = ? , updated_at = ? "
-                                   "WHERE id = ?", (deadline, now, task[5]))
-                    conn.commit()
+                    column = "deadline"
+                    update_query(conn, column, deadline, task[5])
                     print("Deadline updated")
                     return
 
                 print("Invalid choice")
-
-
-
-
-
-
-
-
-
-
 
 
 
