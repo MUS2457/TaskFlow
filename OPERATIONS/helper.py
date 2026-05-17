@@ -38,3 +38,4 @@ def search_by_title(conn):
             results.append(task_tuple)
 
         return results
+

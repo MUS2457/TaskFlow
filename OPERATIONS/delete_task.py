@@ -25,6 +25,7 @@ def delete_task(conn):
             cursor = conn.cursor()
             cursor.execute("DELETE FROM Tasks WHERE id = ?", (task[5],))
             conn.commit()
+
             print("Deletion complete.")
             return
 
