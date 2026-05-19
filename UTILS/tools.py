@@ -1,6 +1,8 @@
-from OPERATIONS import helper
 from DATA.module import Task
 from datetime import datetime
+import re
+from OPERATIONS import helper
+from DATA import summary_json
 
 def search_title(conn):
     results = helper.search_by_title(conn)
@@ -80,7 +82,7 @@ def search_by_status(conn, status=["Pending", "In progress", "Completed"] , x="s
             print("Invalid input. Please try again.")
             continue
 
-        # run SQL
+
         cursor.execute(
             f"SELECT title, description, priority, deadline, status, id, created_at "
             f"FROM Tasks WHERE {x} = ?",
@@ -93,30 +95,86 @@ def search_by_status(conn, status=["Pending", "In progress", "Completed"] , x="s
             print(f"No results found for status: {status_mapper[int(user)]}.")
             continue
 
-        result = []
-        for row in rows:
-            task_id = row["id"]
-            title = row["title"]
-            description = row["description"]
-            priority = row["priority"]
-            status = row["status"]
-            deadline = row["deadline"]
-            created_at = row["created_at"]
-
-            obj = (task_id, Task(title, description, priority, status, deadline), created_at)
-            result.append(obj)
-
-        print(f"\nResults found: {len(result)}\n")
-        for obj in result:
-            print(f"ID        : {obj[0]}")
-            print(f"Task      : {obj[1]}")
-            print(f"Created at: {obj[2]}")
-            print("-" * 40)
-            print()
+        helper.print_results(rows)
 
 def search_by_priority(conn, priority=["Low", "Medium", "High"], x="priority"):
     search_by_status(conn, priority, x)
 
+
+def search_by_deadline(conn):
+    cursor = conn.cursor()
+
+    while True:
+        pattern = r"^\d{4}-\d{2}-\d{2}$"
+
+        user = input(f"Search by deadline enter a date in this format (YYYY-MM-DD) or 'exit' to quit : ").strip()
+
+        if user == "exit":
+            print("Quitting...")
+            break
+
+        elif not re.match(pattern, user) or not user :
+            print("Invalid input. Please try again.")
+            continue
+
+        cursor.execute(
+            "SELECT title, description, priority, status, deadline, id, created_at "
+            "FROM Tasks WHERE DATE(deadline) = DATE(?) ",
+            (user,)
+        )
+
+        rows = cursor.fetchall()
+
+        if not rows:
+            print(f"No results found for deadline: {user}.")
+            continue
+
+        helper.print_results(rows)
+
+
+def review_summary():
+    data = summary_json.load_json()
+
+    if not data:
+        print("No results found. returning back to main menu.")
+        return
+
+    for key, value in sorted(data.items()):
+        print(f"Date which have been added : {key}")
+        print("Task summary:")
+        print(value)
+        print("-" * 40)
+        print()
+
+
+def review_summary_by_date():
+    data = summary_json.load_json()
+    if not data:
+        print("No results found. returning back to main menu.")
+        return
+
+    while True:
+        pattern = r"^\d{4}-\d{2}-\d{2}$"
+        user = input("Enter a date in this format (YYYY-MM-DD) or 'exit' to quit: ").strip()
+
+        if user == "exit":
+            print("Quitting...")
+            break
+
+        if not re.match(pattern, user):
+            print("Invalid input. Please try again.")
+            continue
+
+        matches = [(x, y) for x, y in data.items() if x.startswith(user)]
+
+        if not matches:
+            print(f"No summary found for date: {user}.")
+            continue
+
+        for key, value in matches:
+            print(f"Searched date : {key}")
+            print(value)
+            print("-" * 40)
 
 
 

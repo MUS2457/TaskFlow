@@ -1,3 +1,5 @@
+from DATA.module import Task
+
 def search_by_title(conn):
     cursor = conn.cursor()
 
@@ -38,4 +40,27 @@ def search_by_title(conn):
             results.append(task_tuple)
 
         return results
+
+
+def print_results(rows):
+    result = []
+    for row in rows:
+        task_id = row["id"]
+        title = row["title"]
+        description = row["description"]
+        priority = row["priority"]
+        status = row["status"]
+        deadline = row["deadline"]
+        created_at = row["created_at"]
+
+        obj = (task_id, Task(title, description, priority, status, deadline), created_at)
+        result.append(obj)
+
+    print(f"\nResults found: {len(result)}\n")
+    for obj in result:
+        print(f"ID        : {obj[0]}")
+        print(f"Task      : {obj[1]}")
+        print(f"Created at: {obj[2]}")
+        print("-" * 40)
+        print()
 
