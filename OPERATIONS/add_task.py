@@ -24,11 +24,16 @@ def get_priority_level():
         print("1. Low")
         print("2. Medium")
         print("3. High")
+        level_map = {
+            1: "Low",
+            2: "Medium",
+            3: "High"
+        }
 
         value = input("Enter a priority level (1–3): ").strip()
 
         if value.isdigit() and int(value) in (1, 2, 3):
-            return int(value)
+            return level_map[int(value)]
 
         print("Invalid priority. Choose 1, 2, or 3.")
 
@@ -49,11 +54,16 @@ def get_status():
         print("1. Pending")
         print("2. In progress")
         print("3. Completed")
+        status_map = {
+            1: "Pending",
+            2: "In progress",
+            3: "Completed"
+        }
 
         status = input("Enter a status level (1-3): ").strip()
 
         if status.isdigit() and int(status) in (1, 2, 3):
-            return int(status)
+            return status_map[int(status)]
 
         print("Invalid status level. Choose 1, 2, or 3.")
 

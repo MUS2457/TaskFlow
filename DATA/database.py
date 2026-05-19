@@ -30,6 +30,6 @@ def insert_into_table(conn, tasks):
         """, (task[0], task[1], task[2], task[4], task[3]))
 
     conn.commit()
-    conn.close()
+
 
 

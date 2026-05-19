@@ -9,9 +9,9 @@ def search_title(conn):
     sorted_results = sorted(results, key=lambda k: k[5])
     print("List of your results based on your title and ordered by id :")
     for result in sorted_results:
-        print(f"Task id: {result[6]}")
+        print(f"Task id: {result[5]}")
         print(f"Task : {Task(result[0],result[1],result[2],result[3],result[4])}")
-        print(f"Added time : {result[5]}")
+        print(f"Added time : {result[6]}")
 
 
 def show_updated_tasks_only(conn):

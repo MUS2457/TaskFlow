@@ -35,9 +35,14 @@ class TaskAnalyser:
         if not self.tasks:
             return results
 
-        now = datetime.now()
+        now = datetime.now().date()
+
         for item in self.tasks:
-            if item.deadline < now.date() and item.status != "Completed":
+
+            if isinstance(item.deadline, str):
+                item.deadline = datetime.strptime(item.deadline, "%Y-%m-%d").date()
+
+            if item.deadline < now and item.status != "Completed":
                 results.append(item)
 
         return results
@@ -136,9 +141,9 @@ class TaskAnalyser:
             "status_counts": status_counts,
             "priority_counts": priority_counts,
             "deadline_counts": deadline_counts,
-            "completed_ratio": analyse_helper.completed_ratio(total, status_counts, "Completed"),
-            "pending_ratio": analyse_helper.pending_ratio(total, status_counts, "Pending"),
-            "in_progress_ratio": analyse_helper.in_progress_ratio(total, status_counts, "In progress"),
+            "completed_ratio": analyse_helper.completed_ratio(total, status_counts, "Completed") if status_counts else 0 ,
+            "pending_ratio": analyse_helper.pending_ratio(total, status_counts, "Pending") if status_counts else 0,
+            "in_progress_ratio": analyse_helper.in_progress_ratio(total, status_counts, "In progress") if status_counts else 0,
             "overdue": len(self.overdue_tasks()),
             "due_today": len(self.due_today()),
             "future": len(self.future_tasks())
