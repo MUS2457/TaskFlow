@@ -67,6 +67,7 @@ The CLI provides:
 ### Modular Architecture
 TaskFlow is structured like a real backend system:
 
+```
 TaskFlow/
 │
 ├── DATA/
@@ -76,19 +77,21 @@ TaskFlow/
 │   └── summary_json.py    # Save/load summaries with timestamp keys
 │
 ├── OPERATIONS/
-│   ├── add_tasks.py
+│   ├── add_tasks.py          
 │   ├── delete_task.py
 │   ├── update_tasks.py
 │   └── helper/            # Shared search + utility functions
 │
 ├── LOGIC/
-│   ├── analyser.py        # Analysis logic
+│   ├── analyser.py        # Analysis logic 
 │   └── analyser_helper.py # Extra analysis functions
 │
 ├── UTILS/
 │   └── tools.py           # Fast search + utility functions
 │
 └── main.py                # CLI entry point
+```
+
 
 
 This separation mirrors real backend service layers:
