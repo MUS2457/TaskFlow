@@ -1,7 +1,7 @@
 from DATA.database import create_connection, create_table, insert_into_table
 from DATA.loader import load_data
 from LOGIC.analyser import TaskAnalyser
-from OPERATIONS import add_task, update_tasks, delete_task
+from OPERATIONS import add_task, update_task, delete_task
 from DATA import summary_json
 from UTILS import tools
 
@@ -116,7 +116,7 @@ def main():
     tasks = None
 
     while True:
-        print("\n=== TaskFlow Main Menu ===")
+        print("\n=== TaskFlow Main Menu By (RaijinCode)===")
         print("1. Add new tasks")
         print("2. Load tasks from database")
         print("3. Analyse tasks")
