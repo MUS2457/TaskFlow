@@ -70,25 +70,26 @@ TaskFlow is structured like a real backend system:
 TaskFlow/
 │
 ├── DATA/
-│   └── database.py        # DB connection + shema
-│   └── loader.py          #  load all tasks from db so can be used by analytic fcs
-│   └── module.py          # Task class that use user data input for easy management
-│   └── summary_json.py    # include load/save from/to file this include only summary with unique key current time of running
+│   ├── database.py        # DB connection + schema
+│   ├── loader.py          # Load all tasks from DB for analysis
+│   ├── module.py          # Task class for structured task objects
+│   └── summary_json.py    # Save/load summaries with timestamp keys
 │
 ├── OPERATIONS/
-│   └── add_tasks.py          
-│   └── delete_task.py
-│   └── update_tasks.py
-│   └── helper  # include search engine (one used in all) for operation and other to all serve one purpose clean avoid duplication
+│   ├── add_tasks.py
+│   ├── delete_task.py
+│   ├── update_tasks.py
+│   └── helper/            # Shared search + utility functions
 │
 ├── LOGIC/
-│   └── analyser.py        # Analysis logic 
-│   └── analyser_helper.py        # include fcs that use analytic fc as base
+│   ├── analyser.py        # Analysis logic
+│   └── analyser_helper.py # Extra analysis functions
 │
 ├── UTILS/
-│   └── tools.py           # fcs that provide user fast search
+│   └── tools.py           # Fast search + utility functions
 │
 └── main.py                # CLI entry point
+
 
 This separation mirrors real backend service layers:
 - DATA → database layer
