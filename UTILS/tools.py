@@ -40,7 +40,7 @@ def show_updated_tasks_only(conn):
         updated_at = row["updated_at"]
         created_at = row["created_at"]
 
-        obj = (task_id, Task(title, description, priority, status, deadline), created_at)
+        obj = (task_id, Task(title, description, priority, status, deadline), created_at,updated_at)
         dt = datetime.strptime(updated_at, "%Y-%m-%d %H:%M:%S")
 
         if dt not in mapper:

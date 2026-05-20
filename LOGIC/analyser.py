@@ -53,7 +53,11 @@ class TaskAnalyser:
             return results
 
         now = datetime.now()
+
         for item in self.tasks:
+            if isinstance(item.deadline, str):
+                item.deadline = datetime.strptime(item.deadline, "%Y-%m-%d").date()
+
             if item.deadline == now.date() and item.status != "Completed":
                 results.append(item)
 
@@ -66,6 +70,10 @@ class TaskAnalyser:
 
         now = datetime.now()
         for item in self.tasks:
+
+            if isinstance(item.deadline, str):
+                item.deadline = datetime.strptime(item.deadline, "%Y-%m-%d").date()
+
             if item.deadline > now.date() and item.status != "Completed":
                 results.append(item)
 

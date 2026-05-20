@@ -23,5 +23,31 @@
         "overdue": 0,
         "due_today": 0,
         "future": 2
+    },
+    "2026-05-20 18:29:41": {
+        "total": 5,
+        "status_counts": {
+            "In progress": 2,
+            "Pending": 1,
+            "Completed": 2
+        },
+        "priority_counts": {
+            "Medium": 2,
+            "Low": 1,
+            "High": 2
+        },
+        "deadline_counts": {
+            "2026-06-30": 1,
+            "2026-09-13": 1,
+            "2026-09-12": 1,
+            "2002-03-21": 1,
+            "2026-09-09": 1
+        },
+        "completed_ratio": 0.4,
+        "pending_ratio": 0.2,
+        "in_progress_ratio": 0.4,
+        "overdue": 0,
+        "due_today": 0,
+        "future": 3
     }
 }

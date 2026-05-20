@@ -2,7 +2,7 @@ from datetime import datetime
 from OPERATIONS import add_task, helper
 
 def update_query(conn, colum, new_task, task_id ):  # after writing this query many times , i deside to make a fc to
-    now = datetime.now()                                 # remove duplication
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  #remove duplication
 
     cursor = conn.cursor()
     cursor.execute(f"UPDATE Tasks SET {colum} = ?, updated_at = ? WHERE id = ?",

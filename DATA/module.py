@@ -7,7 +7,7 @@ class Task :
         self.deadline = deadline
 
     def __str__(self):
-        return f'{self.title} {self.description} {self.priority} {self.status} [{self.deadline}]'
+        return f'{self.title} - {self.description} - {self.priority} - {self.status} - [{self.deadline}]'
 
     @classmethod
     def from_tuple(cls, tuples):

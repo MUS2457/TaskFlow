@@ -93,6 +93,11 @@ def analyse_tasks(tasks):
         elif a == "13":
             keyword = input("Enter keyword to search in descriptions: ")
             results = analyser.search_task(keyword)
+
+            if not results:
+                print("No results found.")
+                return
+
             print(f"\nFound {len(results)} results:")
             for t in results:
                 print(t)
